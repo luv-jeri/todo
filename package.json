@@ -1,0 +1,16 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "npm install && cd todo-server && npm install && cd .. && cd todo-frontend && npm install && cd ..",
+    "dev": "concurrently \"cd todo-server && npm run dev\" \"cd todo-frontend && npm run dev\"",
+    "start": "cd todo-frontend && npm run build && cd .. && concurrently \"cd todo-server && npm run start\" \"cd todo-frontend && npm run preview\""
+  },
+  "author": "Sanjay",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
