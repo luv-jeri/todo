@@ -8,9 +8,9 @@ import { useModal } from '../../wrappers/modal/Modal.wrapper';
 import Profile from '../../modals/Profile/Profile.modal';
 
 function NavComponent() {
-  const { user, sign_out } = useAuth();
+  const { user } = useAuth();
   const { openModal } = useModal();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     navigate('/sign_in');

@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useEffect, useState } from 'react';
 import s from './Modal.module.css';
-
+import { useLocation } from 'react-router-dom';
 const ModalContext = createContext();
 
 export const useModal = () => {
@@ -12,6 +12,7 @@ export const useModal = () => {
 };
 
 export function ModalProvider({ children }) {
+  const location = useLocation();
   const [modal, setModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -26,10 +27,14 @@ export function ModalProvider({ children }) {
   };
 
   const toClose = (e) => {
-    if (e.target.classList.contains(s.modal__container)) {
+    if (e.target.classList.contains(s.modal__container) || e.target.dataset.close) {
       closeModal();
     }
   };
+
+  useEffect(() => {
+    closeModal();
+  }, [location]);
 
   return (
     <ModalContext.Provider

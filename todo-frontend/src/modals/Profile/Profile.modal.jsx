@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAuth } from '../../context/Auth.context';
 import s from './Profile.module.css';
-function Profile() {
-  const { user , sign_out } = useAuth();
+function Profile({ onClick }) {
+  const { user, sign_out } = useAuth();
   // user have photo , name , email and a signout function
 
   return (
@@ -12,7 +12,13 @@ function Profile() {
         <h4>{user.name}</h4>
         <p>{user.email}</p>
       </div>
-      <div onClick={sign_out} className={s.logout}>
+      <div
+        data-close
+        onClick={() => {
+          sign_out();
+        }}
+        className={s.logout}
+      >
         Logout
       </div>
     </div>
