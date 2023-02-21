@@ -1,31 +1,57 @@
 import React, { useState } from 'react';
 import s from './SignUp.module.css';
-import { useAuth } from '../../../context/Auth.context';
-import { useNavigate } from 'react-router-dom';
 import UploaderComponent from '../../../components/uploader/Uploader.component';
+import { useAuth } from '../../../context/Auth.context';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useNotification } from '../../../wrappers/notification/Notification.wrapper';
+import catcher from '../../../utils/catcher';
 
 function SignUp() {
-  const { sign_up } = useAuth();
+  const { sign_up, user } = useAuth();
+
+  if (user) return <Navigate to='/' />;
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [image, setImage] = useState('');
-  console.log(image);
+  const { showNotification } = useNotification();
 
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = catcher(
+    async (e) => {
+      e.preventDefault();
 
-    sign_up({
-      photo: image,
-      name,
-      email,
-      password,
-      confirmPassword,
-    });
-  };
+      const data = await sign_up({
+        photo: image,
+        name,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      console.log(data);
+
+      return data;
+    },
+    (error) => {
+      showNotification({
+        title: error.title || 'Sign Up Error',
+        message: error.message,
+        type: 'error',
+      });
+    },
+    (data) => {
+      showNotification({
+        title: 'Sign Up Success',
+        message: 'You have successfully signed up',
+        type: 'success',
+      });
+      navigate('/');
+    }
+  );
 
   const handleNavigate = () => {
     navigate('/sign_in');

@@ -21,6 +21,9 @@
   --clr-accent: #FCA311;
   --clr-main: #537FE7;
   --clr-tone: #14213D;
+  --clr-error : #E63946;
+  --clr-white: #ffffff;
+  --clr-success: #68B984;
 
   --xxs: 0.25rem;
   --xs: 0.5rem;

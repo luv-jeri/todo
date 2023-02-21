@@ -7,9 +7,13 @@ const { promisify } = require('util');
 module.exports.authenticate = catcher(async (req, res, next) => {
   let { authorization } = req.headers;
 
+  console.log('Authorization - Header', authorization);
+
   if (!authorization) {
     authorization = req.cookies.authorization;
   }
+
+  console.log('Authorization - Cookie', authorization);
 
   let token;
 
@@ -29,7 +33,11 @@ module.exports.authenticate = catcher(async (req, res, next) => {
     return next(new _Error('You are logged out.', 401));
   }
 
-  const user = await User.findById(decoded.id);
+  const user = await User.findById(decoded.id, '-password -__v -createdAt -updatedAt');
+
+  if (!user) {
+    return next(new _Error('User does not exist.', 400));
+  }
 
   req.user = user;
 

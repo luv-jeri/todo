@@ -4,9 +4,12 @@ import { useAuth } from '../../context/Auth.context';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import login_icon from '../../assets/login-icon.svg';
+import { useModal } from '../../wrappers/modal/Modal.wrapper';
+import Profile from '../../modals/Profile/Profile.modal';
 
 function NavComponent() {
   const { user, sign_out } = useAuth();
+  const { openModal } = useModal();
   const navigate = useNavigate(); 
 
   const handleLogin = () => {
@@ -22,17 +25,18 @@ function NavComponent() {
       <div id='search' className={s.search}>
         <input placeholder='Look up....' />
       </div>
-      <div id='profile' className={s.profile}>
-        <img
-          onClick={() => {
-            if (!user) {
-              handleLogin();
-            } else {
-              sign_out();
-            }
-          }}
-          src={user ? user.photo : login_icon}
-        />
+      <div
+        onClick={() => {
+          if (!user) {
+            handleLogin();
+          } else {
+            openModal(<Profile />);
+          }
+        }}
+        id='profile'
+        className={s.profile}
+      >
+        <img src={user ? user.photo : login_icon} />
       </div>
     </nav>
   );

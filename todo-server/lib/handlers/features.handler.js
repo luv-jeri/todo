@@ -82,7 +82,7 @@ class Features {
     // ` Pagination
     const page = this.queryString.page * 1 || 1;
     // ` Limit per page
-    const limit = this.queryString.limit * 1 || 100;
+    const limit = this.queryString.limit * 1 || 20;
     // ` Skip number of documents from staring point
     const skip = (page - 1) * limit;
 

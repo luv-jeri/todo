@@ -1,17 +1,13 @@
-import { useNotification } from '../wrappers/notification/Notification.wrapper';
-
-export default function catcher(fun) {
-  const { showNotification } = useNotification();
+export default function catcher(fun, onError, onSuccess) {
   const to_return = async (...args) => {
     try {
-      return await fun(...args);
+      const data = await fun(...args);
+      onSuccess && onSuccess(data);
+      return true;
     } catch (error) {
       console.log(error);
-      showNotification({
-        type: 'error',
-        title: 'Error',
-        message: error.response?.data?.message || error.message,
-      });
+      onError && onError(error);
+      return false;
     }
   };
   return to_return;

@@ -4,13 +4,14 @@ const catcher = require('../lib/utils/catcher');
 const signToken = require('../lib/functions/sign_token');
 
 module.exports.sign_up = catcher(async (req, res, next) => {
-  const { name, email, password, confirmPassword } = req.body;
+  const { name, email, password, confirmPassword , photo} = req.body;
 
   const user = await User.create({
     name,
     email,
     password,
     confirmPassword,
+    photo,
   });
 
   const token = signToken({
@@ -29,7 +30,7 @@ module.exports.sign_up = catcher(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     message: 'User created successfully',
-    data: token,
+    token,
   });
 });
 

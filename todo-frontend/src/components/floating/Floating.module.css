@@ -1,0 +1,25 @@
+.floating__button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: var(--xl);
+    height: var(--xl);
+    border-radius: 50%;
+    background-color: var(--clr-accent);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.125s all ease-in;
+    z-index: 5;
+    font-size: var(--md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.125s all ease-in;
+}
+
+.floating__button:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+}
+
+

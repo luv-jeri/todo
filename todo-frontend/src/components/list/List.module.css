@@ -1,0 +1,35 @@
+.list {
+    height: 100%;
+    flex-wrap: wrap;
+    gap: var(--sm);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: var(--sm);
+}
+
+.list > * {
+    margin-top: var(--sm);
+}
+
+/* Style the scrollbar container */
+.list::-webkit-scrollbar {
+    width: var(--sm);
+    background-color: var(--clr-accent);
+    border-radius: 10px;
+
+}
+
+/* Style the scrollbar thumb */
+.list::-webkit-scrollbar-thumb {
+
+    border-radius: var(--lg);
+    -webkit-box-shadow: inset 0 0 6px var(--clr-main);
+    background-color: var(--clr-main)
+}
+
+/* Style the scrollbar track */
+.list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: var(--lg);
+    background-color: var(--clr-accent);
+}

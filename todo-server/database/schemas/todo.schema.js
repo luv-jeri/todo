@@ -6,7 +6,7 @@ const todoSchema = new Schema(
       type: String,
       required: [true, 'Title is required'],
       minlength: [3, 'Title must be at least 3 characters'],
-      maxlength: [20, 'Title must be at most 20 characters'],
+      maxlength: [70, 'Title must be at most 20 characters'],
     },
     description: {
       type: String,

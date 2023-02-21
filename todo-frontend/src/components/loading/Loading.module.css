@@ -1,13 +1,12 @@
 .loader {
-    border: 16px solid var(--clr-light);
+    border: var(--xs) solid var(--clr-light);
     border-radius: 50%;
-    border-top: 16px solid var(--clr-accent);
+    border-top: var(--xs) solid var(--clr-accent);
     width: 120px;
     height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s ease-in-out infinite;
 }
-
 
 
 @keyframes spin {

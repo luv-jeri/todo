@@ -1,54 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import s from './SignIn.module.css';
 import { useAuth } from '../../../context/Auth.context';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useNotification } from '../../../wrappers/notification/Notification.wrapper';
+import catcher from '../../../utils/catcher';
+import Form from '../../../components/form/Form.component';
 
-import { useNavigate } from 'react-router-dom';
 function SignIn() {
-  const { sign_in } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { sign_in, user } = useAuth();
+
+  if (user) {
+    return <Navigate to='/' />;
+  }
+
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    sign_in(email, password);
-  };
+  const { showNotification } = useNotification();
+
+  const handleClick = catcher(
+    async (value) => {
+      const data = sign_in(value.email, value.password);
+      return data;
+    },
+    (error) => {
+      showNotification({
+        title: error.title || 'Sign In Error',
+        message: error.message,
+        type: 'error',
+      });
+    }
+  );
 
   const handleNavigate = () => {
     navigate('/sign_up');
   };
 
+  const fields = useMemo(
+    () => [
+      {
+        type: 'email',
+        name: 'email',
+        id: 'email',
+        label: 'Email',
+        placeholder: 'Enter your email',
+      },
+      {
+        type: 'password',
+        name: 'password',
+        id: 'password',
+        label: 'Password',
+        placeholder: 'Enter your password',
+      },
+    ],
+    []
+  );
+
   return (
     <div className={s.container}>
       <div className={s.form}>
-        <h1>Sign In</h1>
-        <form>
-          <div className={s.input}>
-            <label htmlFor='email'>Email</label>
-            <input
-              type='email'
-              name='email'
-              id='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className={s.input}>
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              name='password'
-              id='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type='submit' onClick={handleClick}>
-            Sign In
-          </button>
-
-          <h6 onClick={handleNavigate}>Not a user ?</h6>
-        </form>
+        <Form
+          fields={fields}
+          onSubmit={handleClick}
+          title={'Sign In'}
+          submitText='Sign In'
+        />
+        <h6 onClick={handleNavigate}>Not a user ?</h6>
       </div>
     </div>
   );

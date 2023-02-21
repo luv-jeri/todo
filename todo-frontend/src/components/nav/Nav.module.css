@@ -89,7 +89,10 @@
 }
 
 .profile img {
+    cursor: pointer;
+    height: 100%;
     width: var(--md);
+    border-radius: 50%;
     color: aliceblue;
     transition: transform 0.3s ease;
 }

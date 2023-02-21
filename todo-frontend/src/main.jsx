@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 import { AuthProvider } from './context/Auth.context';
 import { NotificationProvider } from './wrappers/notification/Notification.wrapper';
+import { ModalProvider } from './wrappers/modal/Modal.wrapper';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:8080/api/v1/';
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <NotificationProvider>
       <BrowserRouter>
         <AuthProvider>
-          <App />
+          <ModalProvider>
+            <App />
+          </ModalProvider>
         </AuthProvider>
       </BrowserRouter>
     </NotificationProvider>

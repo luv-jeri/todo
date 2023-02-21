@@ -5,6 +5,7 @@ const filter_object = require('../lib/functions/filter_object');
 const Features = require('../lib/handlers/features.handler');
 
 module.exports.find = catcher(async (req, res, next) => {
+  console.log(req.user);
   let todos = new Features(Todo.find(), {
     ...req.query,
     user: req.user.id,
