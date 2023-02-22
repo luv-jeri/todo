@@ -30,6 +30,7 @@ const Loader = () => {
 function Home() {
   const { openModal } = useModal();
 
+
   const pagePending = useRef(1);
   const pageCompleted = useRef(1);
 
