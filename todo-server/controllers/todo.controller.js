@@ -41,6 +41,8 @@ module.exports.update = catcher(async (req, res, next) => {
 
   const { title, description, completed } = req.body;
 
+  console.log(req.body);
+
   let todo = await Todo.findById(id);
 
   if (!todo) {
@@ -53,7 +55,10 @@ module.exports.update = catcher(async (req, res, next) => {
 
   title && (todo.title = title);
   description && (todo.description = description);
-  completed && (todo.completed = completed);
+  // check if completed is boolean
+  if (completed !== undefined) {
+    todo.completed = completed;
+  }
 
   await todo.save();
 
