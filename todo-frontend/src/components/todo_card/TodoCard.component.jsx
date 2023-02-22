@@ -21,6 +21,7 @@ function TodoCard({ title, description, completed, createdAt, _id }) {
     e.target.style.opacity = 1;
     e.dataTransfer.clearData();
   };
+
   return (
     <div
       ref={cardRef}

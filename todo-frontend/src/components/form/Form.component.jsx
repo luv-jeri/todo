@@ -10,8 +10,6 @@ function Form({ title, fields, onSubmit, submitText }) {
     return data_;
   });
 
-  console.log(data);
-
   const onSubmit_ = (e) => {
     e.preventDefault();
     onSubmit(data);
@@ -30,7 +28,6 @@ function Form({ title, fields, onSubmit, submitText }) {
       <h5>{title || 'Form'}</h5>
       <form className={s.form}>
         {fields.map((field) => {
-          console.log(data[field.name]);
           return (
             <div className={s.input} key={field.id}>
               <label htmlFor={field.name}>{field.label}</label>

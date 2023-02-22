@@ -10,7 +10,6 @@ function List({ children, style = {}, onEnd, onDrop, title }) {
     const isAtEnd = scrollTop + clientHeight === scrollHeight;
     if (isAtEnd) {
       onEnd && onEnd();
-      console.log('reached bottom');
     }
   }, []);
 

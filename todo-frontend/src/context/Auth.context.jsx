@@ -79,7 +79,6 @@ const AuthProvider = ({ children }) => {
       throw new Error_('All fields are required', 'Check Fields');
     }
 
-    console.log(photo);
     const { data } = await axios.post('/auth/sign_up', {
       email,
       password,

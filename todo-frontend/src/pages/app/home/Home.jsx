@@ -88,8 +88,6 @@ function Home() {
         completed: true,
       });
 
-      console.log('data', data);
-
       setCompletedData((prev) => {
         return [...prev, data.data];
       });

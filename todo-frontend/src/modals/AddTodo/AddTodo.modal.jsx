@@ -30,7 +30,6 @@ function AddTodo({ onAdd }) {
   const handleSubmit = catcher(
     async (values) => {
       const { data } = await axios.post('todo', values);
-      console.log(data);
       return data;
     },
     (error) => {
